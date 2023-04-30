@@ -1,0 +1,2 @@
+rmq:
+  url: amqp://guest:<% env_tag(param="RMQ_PASS") %>@127.0.0.1:5672/gateway
