@@ -3,10 +3,9 @@ from typing import Tuple
 from aiohttp import ClientSession
 
 SERVICE_MAP = {
-    "clasify": "127.0.0.1:8001",
-    "parse": "0.0.0.0:8002",
-    "nlp": "0.0.0.0:8003",
-    "check": "0.0.0.0:8004",
+    "clasify": "127.0.0.1:8002",
+    "parser": "127.0.0.1:8001",
+    "check": "127.0.0.1:8003",
 }
 
 
@@ -15,16 +14,16 @@ async def resolve(
         path: str,
         params: dict = None,
         data: dict = None,
-        headers: dict = None,
+        headers: dict = None
 ) -> Tuple[dict, int]:
     """
     Функция определяет по первой части url-запроса к какому сервису
     происходит обращение, перенаправляет в него запрос и возвращает
     ответ в виде словаря и код статуса.
     """
-    _, service_name, *_ = path.split("/")
+    _, service_name, api = path.split("/")
     service_host = SERVICE_MAP[service_name]
-    url = f"http://{service_host}{path}"
+    url = f"http://{service_host}/{api}"
     response, status_code = await make_request(
         url, method, params, data, headers
     )
@@ -36,7 +35,7 @@ async def make_request(
         method: str,
         params: dict = None,
         data: dict = None,
-        headers: dict = None,
+        headers: dict = None
 ) -> Tuple[dict, int]:
     """
     Выполнение запроса, тип которого определяется параметром method,

@@ -44,7 +44,7 @@ def router(
                     "path": request.scope["path"],
                     "params": dict(request.query_params),
                     "data": data,
-                    "headers": {},
+                    "headers": {}
                 },
             )
             if response_status_code >= status.HTTP_400_BAD_REQUEST:
