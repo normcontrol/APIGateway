@@ -16,11 +16,6 @@ async def resolve(
         data: dict = None,
         headers: dict = None
 ) -> Tuple[dict, int]:
-    """
-    Функция определяет по первой части url-запроса к какому сервису
-    происходит обращение, перенаправляет в него запрос и возвращает
-    ответ в виде словаря и код статуса.
-    """
     _, service_name, api = path.split("/")
     service_host = SERVICE_MAP[service_name]
     url = f"http://{service_host}/{api}"
@@ -37,10 +32,6 @@ async def make_request(
         data: dict = None,
         headers: dict = None
 ) -> Tuple[dict, int]:
-    """
-    Выполнение запроса, тип которого определяется параметром method,
-    по url-адресу. Возвращает ответ в виде словаря и код статуса.
-    """
 
     if not headers:
         headers = {}

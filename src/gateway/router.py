@@ -138,7 +138,7 @@ async def normocontroler(
                              json={'document_type': all_data.document_type, 'path': all_data.path})
     clasify_response = requests.post('http://127.0.0.1:8002/clasify',
                              json=parse_response.json())
-    json_text = {'gost_id': {'gost_id': all_data.gost}, 'document': clasify_response.json()}
+    json_text = {'gost_id': {'gost_id': all_data.gost}, 'path': {'path': all_data.path}, 'document': clasify_response.json()}
     check_response = requests.post('http://127.0.0.1:8003/check',
                              json= json_text)
     return check_response.json()
